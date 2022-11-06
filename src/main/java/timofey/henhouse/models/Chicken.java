@@ -3,7 +3,7 @@ package timofey.henhouse.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="chiken")
+@Table(name="chicken")
 public class Chicken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

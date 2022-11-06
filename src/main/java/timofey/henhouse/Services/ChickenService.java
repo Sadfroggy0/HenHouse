@@ -12,9 +12,8 @@ import java.util.List;
 @Service
 @Transactional
 public class ChickenService implements ICrudService<Chicken> {
-
     @Autowired
-    ChickenRepository chickenRepo;
+    protected ChickenRepository chickenRepo;
 
     @Override
     public void save(Chicken obj) {
