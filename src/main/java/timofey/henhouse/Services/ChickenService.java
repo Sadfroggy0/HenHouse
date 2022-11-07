@@ -22,6 +22,7 @@ public class ChickenService implements ICrudService<Chicken> {
 
     @Override
     public void update(Chicken obj) {
+
         chickenRepo.save(obj);
     }
 

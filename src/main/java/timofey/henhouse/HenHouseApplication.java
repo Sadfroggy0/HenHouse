@@ -18,7 +18,7 @@ public class HenHouseApplication {
     @Bean
     public CommandLineRunner commandLineRunner(HouseRepository hr){
         return args ->{
-            hr.save(new House( "Newhouse"));
+//            hr.save(new House( "Newhouse"));
         };
     }
 
