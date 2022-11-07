@@ -9,7 +9,7 @@ import timofey.henhouse.repositories.ChickenRepository;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("chickens")
+@RequestMapping("/chickens")
 public class MainPageController {
 
     @Autowired
