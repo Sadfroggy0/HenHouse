@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Chicken {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "house_id")
@@ -15,7 +15,7 @@ public class Chicken {
 
     public Chicken(){}
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

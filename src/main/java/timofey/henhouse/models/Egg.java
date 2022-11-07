@@ -7,12 +7,12 @@ import javax.persistence.*;
 public class Egg {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     @Column(name="chicken_id")
     private int chicken_id;
     public Egg(){}
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

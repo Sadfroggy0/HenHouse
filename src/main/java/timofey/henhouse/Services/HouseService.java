@@ -1,12 +1,14 @@
 package timofey.henhouse.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import timofey.henhouse.models.House;
 import timofey.henhouse.repositories.HouseRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class HouseService implements ICrudService<House> {
     @Autowired
     HouseRepository houseRepository;
