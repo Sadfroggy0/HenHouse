@@ -19,7 +19,7 @@ public class HouseService implements ICrudService<House> {
     }
 
     @Override
-    public void update(House obj) {
+    public void update( House obj) {
         houseRepository.save(obj);
     }
 

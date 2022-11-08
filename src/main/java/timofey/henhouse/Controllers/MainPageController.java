@@ -30,14 +30,12 @@ public class MainPageController {
     }
     @PutMapping("{id}")
     public Chicken update(@PathVariable("id")int id ,@RequestBody Chicken chicken){
-        Chicken chicken1 = cs.findById(id);
-        chicken1 = chicken;
-        cs.update(chicken1);
-        return chicken1;
+        cs.update(chicken);
+        return cs.findById(chicken.getId());
     }
     @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        cs.deleteById(id);
+    public void delete(@PathVariable String id){
+        cs.deleteById(Integer.parseInt(id));
     }
 
 }

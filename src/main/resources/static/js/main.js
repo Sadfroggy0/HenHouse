@@ -10,21 +10,26 @@ function getIndex(list, id){
  }
 }
 
-Vue.component('chicken-edit',{
-    props:['chicken'],
-    template:'',
-
-});
 
 Vue.component('chicken-row',{
-    props:['chicken','editMethod'],
+    props:['chicken','editMethod','chickens'],
     template:'<div>' +
             '<i>({{chicken.id}})</i> {{chicken.name}} | houseID:{{chicken.house_id}}' +
-            '<input type="button" value="Edit value" v-on:click="edit" >'+
+                '<span>' +
+                    '<input type="button" value="Edit" v-on:click="edit" >'+
+                    '<input type="button" value="Delete" v-on:click="del" >'+
+                '</span>'+
         '</div>',
     methods:{
         edit:function (){
             this.editMethod(this.chicken)
+        },
+        del:function (){
+            serverData.remove({id: this.chicken.id}).then(result =>{
+                if (result.ok){
+                    this.chickens.splice(this.chickens.indexOf(this.chicken),1)
+                }
+            })
         }
     }
 
@@ -40,8 +45,8 @@ Vue.component('chicken-list', {
     template:
         '<div>' +
             '<chicken-form :chickens="chickens" :chickenFromEdit="chicken"/>'+
-            '<chicken-row v-for="chicken in chickens" :chicken="chicken" ' +
-            ':editMethod="editMethod "/> '+
+            '<chicken-row v-for="chicken in chickens" :chicken="chicken" :key="chicken.id"' +
+            ':editMethod="editMethod" :chickens="chickens"/> '+
         '</div>',
     methods:{
         editMethod:function(chicken){
@@ -74,7 +79,7 @@ Vue.component('chicken-form',{
         '</div>',
     methods:{
         save:function (){
-            var chicken ={name: this.text, house_id: this.house_id};
+            var chicken ={id:this.id, name: this.text, house_id: this.house_id};
             if(this.id){
                 serverData.update({id:this.id},chicken).then(
                     result => result.json().then(data =>{
