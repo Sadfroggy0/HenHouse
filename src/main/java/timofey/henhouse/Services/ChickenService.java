@@ -1,10 +1,6 @@
 package timofey.henhouse.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import timofey.henhouse.models.Chicken;
@@ -24,16 +20,20 @@ public class ChickenService implements ICrudService<Chicken> {
         chickenRepo.save(obj);
     }
 
+    public ArrayList<Chicken> chickensByHouseId(int id){
+       return chickenRepo.chickensByHouseId(id);
+    }
+
     @Override
     public void update(Chicken obj) {
         Chicken chickenFromDB = chickenRepo.findById(obj.getId());
         if(obj.getName() != null ){
             chickenFromDB.setName(obj.getName());
         }
-        if(obj.getHouse_id() != 0){
+        if(obj.getHouse_id() != 0 & obj.getHouse_id() >=-1){
             chickenFromDB.setHouse_id(obj.getHouse_id());
         }
-        chickenRepo.updateName(obj.getId(), chickenFromDB.getName());
+        chickenRepo.update(obj.getId(), chickenFromDB.getName(), chickenFromDB.getHouse_id());
 
     }
 

@@ -1,5 +1,6 @@
 
 var serverData = Vue.resource("/chickens{/id}")
+var eggData = Vue.resource("/egg{/chicken_id}")
 
 function getIndex(list, id){
  for (var i = 0; i<list.length; i++){
@@ -10,17 +11,22 @@ function getIndex(list, id){
  }
 }
 
-
 Vue.component('chicken-row',{
     props:['chicken','editMethod','chickens'],
     template:'<div>' +
             '<i>({{chicken.id}})</i> {{chicken.name}} | houseID:{{chicken.house_id}}' +
                 '<span>' +
                     '<input type="button" value="Edit" v-on:click="edit" >'+
+                    '<input type="button" value="Add Egg" v-on:click="addEgg" >'+
                     '<input type="button" value="Delete" v-on:click="del" >'+
                 '</span>'+
         '</div>',
     methods:{
+        addEgg:function (){
+            var newEgg ={ chicken_id: this.chicken.id}
+            eggData.save({}, newEgg).then(result => result.json().then(data=>console.log(data)))
+
+        },
         edit:function (){
             this.editMethod(this.chicken)
         },
@@ -101,23 +107,22 @@ Vue.component('chicken-form',{
     }
 });
 
+
 var mp = new Vue({
     el: '#mp',
-    template:
-            '<chicken-list :chickens= "chickens" />',
-
+    template: '<chicken-list :chickens= "chickens"/>',
+    data: {
+        chickens:[],
+    },
     created: function (){
         serverData.get().then(result =>
-        result.json().then(data =>
-            data.forEach(chicken => this.chickens.push(chicken))
-        ))
+            result.json().then(data =>
+                data.forEach(chicken => this.chickens.push(chicken))
+            ))
         serverData.get().then(result =>
             result.json().then(data =>
                 data.forEach(chicken => console.log(chicken))
             ))
     },
 
-    data: {
-        chickens: []
-    }
 });

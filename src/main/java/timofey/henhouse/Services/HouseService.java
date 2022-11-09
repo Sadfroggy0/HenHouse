@@ -18,14 +18,19 @@ public class HouseService implements ICrudService<House> {
         houseRepository.save(obj);
     }
 
-    @Override
-    public void update( House obj) {
-        houseRepository.save(obj);
-    }
 
     @Override
     public House findById(int id) {
         return houseRepository.findById(id);
+    }
+    @Override
+    public void update(House obj) {
+        House houseFromDB = houseRepository.findById(obj.getId());
+        if(obj.getName() != null ){
+            houseFromDB.setName(obj.getName());
+        }
+        houseRepository.update(obj.getId(), houseFromDB.getName());
+
     }
 
     @Override
@@ -41,6 +46,6 @@ public class HouseService implements ICrudService<House> {
 
     @Override
     public void deleteById(int id) {
-        houseRepository.deleteById((long)id);
+        houseRepository.deleteById(id);
     }
 }

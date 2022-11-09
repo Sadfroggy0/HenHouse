@@ -1,17 +1,12 @@
 package timofey.henhouse.repositories;
 
-import jdk.jfr.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import timofey.henhouse.models.Chicken;
 
-import java.util.Optional;
+import java.util.ArrayList;
 
 @Transactional
 public interface ChickenRepository extends JpaRepository<Chicken, Long> {
@@ -19,7 +14,12 @@ public interface ChickenRepository extends JpaRepository<Chicken, Long> {
     void deleteById(int id);
 
     @Modifying
-    @Query("UPDATE Chicken c set c.name = :name where c.id = :id")
-    void updateName(int id, String name);
+    @Query("UPDATE Chicken c " +
+            "set c.name = :name, c.house_id =:house_id " +
+            "where c.id = :id")
+    void update(int id, String name, int house_id);
+
+    @Query(value = "SELECT * FROM Chicken c WHERE  c.house_id = ?1", nativeQuery = true)
+    ArrayList<Chicken> chickensByHouseId(int houseId);
 
 }

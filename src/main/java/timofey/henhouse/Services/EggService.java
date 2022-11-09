@@ -7,9 +7,7 @@ import timofey.henhouse.models.Egg;
 import timofey.henhouse.repositories.EggRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
