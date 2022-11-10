@@ -15,6 +15,7 @@ public class HouseService implements ICrudService<House> {
 
     @Override
     public void save(House obj) {
+        if (obj.getName()!=null && obj.getName().length() <= 40 && obj.getName().length()>0)
         houseRepository.save(obj);
     }
 

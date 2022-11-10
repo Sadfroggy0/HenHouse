@@ -15,23 +15,24 @@
 </head>
 <body>
 
-<div id="house">
-    <table class="table table-success table-striped" style="width: 50%">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="house in houses">
-            <th scope="row">{{house.id}}</th>
-            <td>{{house.name}}</td>
-            <td><a :href=" '/chickens/house/' + house.id ">More</a></td>
-        </tr>
-        </tbody>
-    </table>
+<div id="house" style="width: 40%">
+<!--    <table class="table table-success table-striped" style="width: 50%">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th scope="col">#</th>-->
+<!--            <th scope="col">Name</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr v-for="house in houses">-->
+<!--            <th scope="row">{{house.id}}</th>-->
+<!--            <td>{{house.name}}</td>-->
+<!--            <td><a :href=" '/chickens/house/' + house.id ">More</a></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 </div>
+<!--<div id="creation-form"></div>-->
 <div id="chicken-card" ></div>
 
 

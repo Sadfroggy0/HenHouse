@@ -27,6 +27,7 @@ public class ChickenController {
     public Chicken getOne(@PathVariable("id") int id){
         return cs.findById(id);
     }
+
     @PostMapping
     public Chicken create(@RequestBody Chicken chicken){
          cs.save(chicken);

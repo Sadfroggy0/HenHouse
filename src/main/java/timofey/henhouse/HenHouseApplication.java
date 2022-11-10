@@ -22,10 +22,7 @@ public class HenHouseApplication {
     @Bean
     public CommandLineRunner commandLineRunner(ChickenService cs, HouseRepository hr, ChickenRepository cr){
         return args ->{
-            House house = hr.findById(1);
-           List<Chicken> l =  house.getChickenList();
-           ArrayList<Chicken>arrayList = cs.chickensByHouseId(1);
-            System.out.println(house.getChickenList());
+
         };
     }
 

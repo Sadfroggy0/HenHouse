@@ -26,7 +26,7 @@ public class HouseController {
     @PostMapping
     public House create(@RequestBody House house){
         hs.save(house);
-        return house;
+        return hs.findById(house.getId());
     }
     @PutMapping("{id}")
     public House update(@RequestBody House house){
