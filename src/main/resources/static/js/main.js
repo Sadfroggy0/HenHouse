@@ -13,14 +13,38 @@ function getIndex(list, id){
 
 Vue.component('chicken-row',{
     props:['chicken','editMethod','chickens'],
-    template:'<div>' +
-            '<i>({{chicken.id}})</i> {{chicken.name}} | houseID:{{chicken.house_id}}' +
-                '<span>' +
-                    '<input type="button" value="Edit" v-on:click="edit" >'+
-                    '<input type="button" value="Add Egg" v-on:click="addEgg" >'+
-                    '<input type="button" value="Delete" v-on:click="del" >'+
-                '</span>'+
-        '</div>',
+
+    template:
+        '  <div class="accordion-item">\n' +
+        '    <h2 class="accordion-header" id="panelsStayOpen-headingOne">\n' +
+        '      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">\n' +
+        '        (ID: {{chicken.id}}) {{chicken.name}}\n' +
+        '      </button>\n' +
+        '    </h2>\n' +
+        '    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">\n' +
+        '      <div class="accordion-body">\n' +
+                ' <strong> Name of the chicken:</strong> {{chicken.name}} <br/> <strong>houseID</strong>:{{chicken.house_id}} | {(chicken.eggList}}' +
+                    '<br/>'+
+                    '<span>'+
+                        '<input type="button" value="Edit" v-on:click="edit" >'+
+                        '<input type="button" value="Add Egg" v-on:click="addEgg" >'+
+                        '<input type="button" value="Delete" v-on:click="del" >'+
+                    '</span>'+
+        '      </div>\n' +
+        '    </div>\n' +
+        '  </div>',
+
+
+
+
+    // template:'<div>' +
+    //         '<i>({{chicken.id}})</i> {{chicken.name}} | houseID:{{chicken.house_id}}' +
+    //             '<span>' +
+    //                 '<input type="button" value="Edit" v-on:click="edit" >'+
+    //                 '<input type="button" value="Add Egg" v-on:click="addEgg" >'+
+    //                 '<input type="button" value="Delete" v-on:click="del" >'+
+    //             '</span>'+
+    //     '</div>',
     methods:{
         addEgg:function (){
             var newEgg ={ chicken_id: this.chicken.id}
@@ -48,11 +72,16 @@ Vue.component('chicken-list', {
           chicken: null
       }
     },
+
     template:
         '<div>' +
             '<chicken-form :chickens="chickens" :chickenFromEdit="chicken"/>'+
-            '<chicken-row v-for="chicken in chickens" :chicken="chicken" :key="chicken.id"' +
-            ':editMethod="editMethod" :chickens="chickens"/> '+
+                '<div class="accordion" id="accordionOpenExample" style="padding-top: 40.5px">\n' +
+                    '<chicken-row v-for="chicken in chickens" :chicken="chicken" :key="chicken.id"' +
+                    ':editMethod="editMethod" :chickens="chickens"/> '+
+                '</div>'+
+            // '<chicken-row v-for="chicken in chickens" :chicken="chicken" :key="chicken.id"' +
+            // ':editMethod="editMethod" :chickens="chickens"/> '+
         '</div>',
     methods:{
         editMethod:function(chicken){

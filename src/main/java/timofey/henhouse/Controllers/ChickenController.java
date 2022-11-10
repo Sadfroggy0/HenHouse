@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import timofey.henhouse.Services.ChickenService;
 import timofey.henhouse.models.Chicken;
+import timofey.henhouse.models.Egg;
 
 import java.util.ArrayList;
 @RestController
@@ -22,11 +23,16 @@ public class ChickenController {
     public ArrayList<Chicken> chickensByHouseId(@PathVariable("id") int houseId){
         return new ArrayList<Chicken>(cs.chickensByHouseId(houseId));
     }
+    @GetMapping("/eggs")
+    public ArrayList<Egg>eggs(){
+        return new ArrayList<Egg>();
+    }
 
     @GetMapping("{id}")
     public Chicken getOne(@PathVariable("id") int id){
         return cs.findById(id);
     }
+
 
     @PostMapping
     public Chicken create(@RequestBody Chicken chicken){

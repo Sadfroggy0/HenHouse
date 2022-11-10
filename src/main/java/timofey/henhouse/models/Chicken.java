@@ -14,8 +14,10 @@ public class Chicken {
     @Column(name = "house_id")
     private int house_id;
 
+
     @OneToMany(fetch = FetchType.EAGER, targetEntity=Egg.class, mappedBy="chicken_id")
     private List<Egg> eggList;
+
 
     public Chicken(){}
 

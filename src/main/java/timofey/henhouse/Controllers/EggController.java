@@ -3,7 +3,6 @@ package timofey.henhouse.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import timofey.henhouse.Services.EggService;
-import timofey.henhouse.models.Chicken;
 import timofey.henhouse.models.Egg;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class EggController {
     }
     @GetMapping("{id}")
     Egg getOne(@PathVariable int id ){
-
         return es.findById(id);
     }
     @PostMapping()

@@ -1,5 +1,7 @@
 var houseData = Vue.resource("/houses{/id}")
 var chickenData = Vue.resource("/chickens/house{/id}")
+var chickenDataSorted = Vue.resource("/chickens/house{/id}")
+var sortById = function (d1, d2) { return (d1.id > d2.id) ? 1 : -1; };
 
 var form = new Vue({
     el:'#form',
@@ -7,7 +9,7 @@ var form = new Vue({
 })
 
 var house = new Vue({
-    template:'<house-list :houses="houses"></house-list>',
+    template:'<house-list :houses="sortedList"></house-list>',
     el:'#house',
     data: {
         houses:[],
@@ -22,6 +24,11 @@ var house = new Vue({
                 data.forEach(house => console.log(house))
             ))
     },
+    computed:{
+        sortedList(){
+            return this.houses.sort(sortById)
+        }
+    }
 })
 
 Vue.component('house-list',{
@@ -33,7 +40,7 @@ Vue.component('house-list',{
     },
     template: '<div>' +
               '<house-form :houses = "houses" :houseFromEdit = "house_"></house-form>'+
-            '    <table class="table table-success table-striped" style="width: 50%">\n' +
+            '    <table class="table table-success table-striped">\n' +
             '        <thead>\n' +
             '        <tr>\n' +
             '            <th scope="col">#</th>\n' +
@@ -83,9 +90,7 @@ Vue.component('house-form',{
                         this.houses.splice(index, 1, data);
                         this.name = '';
                         this.id = '';
-
                     }))
-
             }
             else {
                 houseData.save({}, house).then(result => result.json().then(data => {
@@ -98,16 +103,20 @@ Vue.component('house-form',{
 
 })
 
-
-
 Vue.component('tableForm',{
+    data:function(){
+        return{
+            tempList:[]
+        }
+    },
     props:['house','houses','editMethod'],
     template:'<tr>' +
        ' <th scope="row">{{house.id}}</th>'+
 '            <td>{{house.name}}</td>\n' +
 '            <td><input type="button" value="Edit" @click="edit"></td>\n' +
 '            <td><input type="button" value="Delete" @click="del"></td>\n' +
-'            <td><a :href=" \'/chickens/house/\' + house.id ">More</a></td>\n' +
+// '            <td><input type="button" value="MoreInfo" @click="inf"></td>\n' +
+// // '            <td><a :href=" \'/chickens/house/\' + house.id ">More</a></td>\n' +
         '</tr>',
 
     methods:{
@@ -120,7 +129,8 @@ Vue.component('tableForm',{
                     this.houses.splice(this.houses.indexOf(this.house),1)
                 }
             })
-        }
+        },
+
     }
 
 })
