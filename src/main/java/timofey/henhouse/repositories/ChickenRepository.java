@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import timofey.henhouse.models.Chicken;
+import timofey.henhouse.models.Egg;
 
 import java.util.ArrayList;
 
@@ -22,4 +23,6 @@ public interface ChickenRepository extends JpaRepository<Chicken, Long> {
     @Query(value = "SELECT * FROM Chicken c WHERE  c.house_id = ?1", nativeQuery = true)
     ArrayList<Chicken> chickensByHouseId(int houseId);
 
+    @Query(value = "SELECT * FROM e Egg where e.chicken_id == ?1 ", nativeQuery = true)
+    ArrayList<Egg> findEggsById(int id);
 }

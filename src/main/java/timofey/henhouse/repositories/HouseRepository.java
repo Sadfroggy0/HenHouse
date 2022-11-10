@@ -15,8 +15,8 @@ public interface HouseRepository extends CrudRepository<House,Long> {
 
     @Modifying
     @Query("UPDATE House h " +
-            "SET h.name = :name " +
-            "where h.id = :id")
+            "SET h.name = ?2 " +
+            "where h.id = ?1")
     void update(int id, String name);
 
 }

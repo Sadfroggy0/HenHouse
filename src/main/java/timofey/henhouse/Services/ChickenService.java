@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import timofey.henhouse.models.Chicken;
+import timofey.henhouse.models.Egg;
 import timofey.henhouse.repositories.ChickenRepository;
 
 import java.util.ArrayList;
@@ -56,5 +57,9 @@ public class ChickenService implements ICrudService<Chicken> {
     @Override
     public void deleteById(int id) {
         chickenRepo.deleteById(id);
+    }
+
+    public ArrayList<Egg> findEggsById(int id) {
+        return chickenRepo.findEggsById(id);
     }
 }

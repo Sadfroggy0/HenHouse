@@ -1,6 +1,7 @@
 
 var serverData = Vue.resource("/chickens{/id}")
 var eggData = Vue.resource("/egg{/chicken_id}")
+var eggs = Vue.resource("/chickens/eggs")
 
 function getIndex(list, id){
  for (var i = 0; i<list.length; i++){
@@ -23,7 +24,7 @@ Vue.component('chicken-row',{
         '    </h2>\n' +
         '    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">\n' +
         '      <div class="accordion-body">\n' +
-                ' <strong> Name of the chicken:</strong> {{chicken.name}} <br/> <strong>houseID</strong>:{{chicken.house_id}} | {(chicken.eggList}}' +
+                ' <strong> Name of the chicken:</strong> {{chicken.name}} <br/> <strong>houseID</strong>:{{chicken.house_id}}' +
                     '<br/>'+
                     '<span>'+
                         '<input type="button" value="Edit" v-on:click="edit" >'+
@@ -136,7 +137,6 @@ Vue.component('chicken-form',{
     }
 });
 
-
 var mp = new Vue({
     el: '#mp',
     template: '<chicken-list :chickens= "chickens"/>',
@@ -148,10 +148,7 @@ var mp = new Vue({
             result.json().then(data =>
                 data.forEach(chicken => this.chickens.push(chicken))
             ))
-        serverData.get().then(result =>
-            result.json().then(data =>
-                data.forEach(chicken => console.log(chicken))
-            ))
+        console.log(this.chickens)
     },
 
 });

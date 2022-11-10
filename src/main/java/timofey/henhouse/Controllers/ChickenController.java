@@ -23,9 +23,9 @@ public class ChickenController {
     public ArrayList<Chicken> chickensByHouseId(@PathVariable("id") int houseId){
         return new ArrayList<Chicken>(cs.chickensByHouseId(houseId));
     }
-    @GetMapping("/eggs")
-    public ArrayList<Egg>eggs(){
-        return new ArrayList<Egg>();
+    @GetMapping("{id}/eggs")
+    public ArrayList<Egg>eggsById(@PathVariable int id){
+        return cs.findEggsById(id);
     }
 
     @GetMapping("{id}")
